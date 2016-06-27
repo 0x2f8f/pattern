@@ -1,2 +1,4 @@
-# pattern
-Design pattern
+Pattern
+==========
+
+About design patterns
