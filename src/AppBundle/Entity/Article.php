@@ -30,19 +30,19 @@ class Article
 
     /**
      * @Gedmo\TreeLeft
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $lft;
 
     /**
      * @Gedmo\TreeLevel
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $lvl;
 
     /**
      * @Gedmo\TreeRight
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $rgt;
 
@@ -67,12 +67,12 @@ class Article
     private $children;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $created;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $updated;
 
@@ -91,12 +91,22 @@ class Article
         return $this->title;
     }
 
+    public function setBody($body)
+    {
+        $this->body = $body;
+    }
+
+    public function getBody()
+    {
+        return $this->body;
+    }
+
     public function getRoot()
     {
         return $this->root;
     }
 
-    public function setParent(Category $parent = null)
+    public function setParent(Article $parent = null)
     {
         $this->parent = $parent;
     }
@@ -104,5 +114,10 @@ class Article
     public function getParent()
     {
         return $this->parent;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }
