@@ -30,7 +30,8 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "sonata-project/admin-bundle": "^3.3",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.0"
+        "sonata-project/doctrine-orm-admin-bundle": "^3.0",
+        "gedmo/doctrine-extensions": "^2.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
