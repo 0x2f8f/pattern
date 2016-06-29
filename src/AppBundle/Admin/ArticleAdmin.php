@@ -19,11 +19,6 @@ class ArticleAdmin extends AbstractAdmin
             ->add('id')
             ->add('title')
             ->add('body')
-            ->add('lft')
-            ->add('lvl')
-            ->add('rgt')
-            ->add('created')
-            ->add('updated')
         ;
     }
 
@@ -35,14 +30,6 @@ class ArticleAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('title')
-            /*
-            ->add('body')
-            ->add('lft')
-            ->add('lvl')
-            ->add('rgt')
-            ->add('created')
-            ->add('updated')
-            */
             ->add('_action', null, array(
                 'actions' => array(
                     'show' => array(),
@@ -62,13 +49,6 @@ class ArticleAdmin extends AbstractAdmin
             //->add('id')
             ->add('title')
             ->add('body')
-            /*
-            ->add('lft')
-            ->add('lvl')
-            ->add('rgt')
-            ->add('created')
-            ->add('updated')
-            */
         ;
     }
 
@@ -81,11 +61,6 @@ class ArticleAdmin extends AbstractAdmin
             ->add('id')
             ->add('title')
             ->add('body')
-            ->add('lft')
-            ->add('lvl')
-            ->add('rgt')
-            ->add('created')
-            ->add('updated')
         ;
     }
 }

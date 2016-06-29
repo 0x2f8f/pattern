@@ -2,8 +2,9 @@
 
 namespace AppBundle\Entity;
 
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -12,108 +13,189 @@ use Doctrine\ORM\Mapping as ORM;
 class Article
 {
     /**
-     * @ORM\Column(type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=200)
+     * @Assert\NotBlank(
+     *      message = "Title cannot be blank"
+     * )
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "Title is too short"
+     * )
      */
     private $title;
 
     /**
+     * @Gedmo\Slug(fields={"title"}, updatable=true, separator="-")
+     *
+     * @ORM\Column(name="slug", type="string", length=200, nullable=false, unique=true)
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
+
+    /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(
+     *      message = "Content cannot be blank"
+     * )
+     * @Assert\Length(
+     *      min = "10",
+     *      minMessage = "Content must have min. 10 characters"
+     * )
      */
     private $body;
 
     /**
-     * @Gedmo\TreeLeft
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(
+     *      message = "DateTime cannot be blank"
+     * )
+     * @Assert\DateTime(
+     *      message = "DateTime is not valid"
+     * )
      */
-    private $lft;
+    protected $published;
 
     /**
-     * @Gedmo\TreeLevel
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
-    private $lvl;
+    private $category;
 
     /**
-     * @Gedmo\TreeRight
-     * @ORM\Column(type="integer", nullable=true)
+     * @return mixed
      */
-    private $rgt;
-
-    /**
-     * @Gedmo\TreeRoot
-     * @ORM\ManyToOne(targetEntity="Article")
-     * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
-     */
-    private $root;
-
-    /**
-     * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="children")
-     * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
-     */
-    private $parent;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="parent")
-     * @ORM\OrderBy({"lft" = "ASC"})
-     */
-    private $children;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    protected $created;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    protected $updated;
-
     public function getId()
     {
         return $this->id;
     }
 
-    public function setTitle($title)
+    /**
+     * @param mixed $id
+     * @return Article
+     */
+    public function setId($id)
     {
-        $this->title = $title;
+        $this->id = $id;
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param mixed $active
+     * @return Article
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getTitle()
     {
         return $this->title;
     }
 
-    public function setBody($body)
+    /**
+     * @param mixed $title
+     * @return Article
+     */
+    public function setTitle($title)
     {
-        $this->body = $body;
+        $this->title = $title;
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getBody()
     {
         return $this->body;
     }
 
-    public function getRoot()
+    /**
+     * @param mixed $body
+     * @return Article
+     */
+    public function setBody($body)
     {
-        return $this->root;
+        $this->body = $body;
+        return $this;
     }
 
-    public function setParent(Article $parent = null)
+    /**
+     * @return mixed
+     */
+    public function getCategory()
     {
-        $this->parent = $parent;
+        return $this->category;
     }
 
-    public function getParent()
+    /**
+     * @param mixed $category
+     * @return Article
+     */
+    public function setCategory($category)
     {
-        return $this->parent;
+        $this->category = $category;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     * @return Article
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * @param mixed $published
+     * @return Article
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+        return $this;
     }
 
     public function __toString()
