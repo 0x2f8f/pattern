@@ -78,9 +78,25 @@ sonata_block:
         # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts: [admin]
+sonata_admin:
+    templates:
+        layout:  sonata_admin_base_layout.html.twig
 
 stof_doctrine_extensions:
     orm:
         default:
             timestampable: true
             sluggable:     true
+
+ivory_ck_editor:
+    default_config: my_config
+    configs:
+        my_config:
+            toolbar: full
+            uiColor:                "#000000"
+            filebrowserUploadRoute: "web/uploads"
+            extraPlugins:           "codesnippet"
+    plugins:
+        codesnippet:
+            path:     "/bundles/app/ckeditor/codesnippet/"
+            filename: "plugin.js"

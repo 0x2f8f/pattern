@@ -60,7 +60,10 @@ class ArticleAdmin extends AbstractAdmin
             ->add('title')
             //->add('slug')
             ->add('category')
-            ->add('body')
+            ->add('body', 'textarea',
+                array(
+                    'attr' => array('class'=>'ckeditor'),
+                ))
             //->add('date_time')
         ;
     }
