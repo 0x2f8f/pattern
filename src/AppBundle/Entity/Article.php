@@ -56,15 +56,10 @@ class Article
     private $body;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
-     * @Assert\NotBlank(
-     *      message = "DateTime cannot be blank"
-     * )
-     * @Assert\DateTime(
-     *      message = "DateTime is not valid"
-     * )
      */
-    protected $published;
+    protected $date_time;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category")
@@ -171,31 +166,34 @@ class Article
     }
 
     /**
-     * @param mixed $slug
-     * @return Article
+     * Set dateTime
+     *
+     * @param date $dateTime
+     * @return self
      */
-    public function setSlug($slug)
+    public function setDateTime($dateTime)
     {
-        $this->slug = $slug;
+        $this->date_time = $dateTime;
         return $this;
     }
 
     /**
-     * @return mixed
+     * Get dateTime
+     *
+     * @return date $dateTime
      */
-    public function getPublished()
+    public function getDateTime()
     {
-        return $this->published;
+        return $this->date_time;
     }
-
     /**
-     * @param mixed $published
-     * @return Article
+     * Дата/время лога
+     *
+     * @return string
      */
-    public function setPublished($published)
+    public function getDateTimeFormat($format = 'd.m.y H:i.s')
     {
-        $this->published = $published;
-        return $this;
+        return $this->getDateTime()->format($format);
     }
 
     public function __toString()

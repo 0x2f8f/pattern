@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class ArticleAdmin extends AbstractAdmin
+class CategoryAdmin extends AbstractAdmin
 {
     /**
      * @param DatagridMapper $datagridMapper
@@ -17,12 +17,9 @@ class ArticleAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('id')
+            ->add('active')
             ->add('title')
             ->add('slug')
-            ->add('active')
-            ->add('body')
-            ->add('category')
-            ->add('date_time')
         ;
     }
 
@@ -33,12 +30,9 @@ class ArticleAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
+            ->add('active')
             ->add('title')
             ->add('slug')
-            ->add('active')
-            //->add('body')
-            ->add('category')
-            ->add('date_time')
             ->add('_action', null, array(
                 'actions' => array(
                     'show' => array(),
@@ -59,9 +53,6 @@ class ArticleAdmin extends AbstractAdmin
             ->add('active')
             ->add('title')
             //->add('slug')
-            ->add('category')
-            ->add('body')
-            //->add('date_time')
         ;
     }
 
@@ -72,12 +63,9 @@ class ArticleAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id')
+            ->add('active')
             ->add('title')
             ->add('slug')
-            ->add('active')
-            ->add('category')
-            ->add('body')
-            ->add('date_time')
         ;
     }
 }

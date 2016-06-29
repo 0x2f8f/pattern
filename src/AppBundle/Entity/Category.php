@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -26,6 +27,12 @@ class Category
      * @ORM\Column(type="string")
      */
     private $title;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
 
     /**
      * @return mixed
@@ -81,5 +88,16 @@ class Category
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 
+    public function __toString()
+    {
+        return $this->title;
+    }
 }
