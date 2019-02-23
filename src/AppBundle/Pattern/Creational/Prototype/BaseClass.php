@@ -11,8 +11,8 @@ namespace AppBundle\Pattern\Creational\Prototype;
  */
 class BaseClass
 {
-    private $firstName;
-    private $lastName;
+    protected $firstName;
+    protected $lastName;
 
     /**
      * @return mixed

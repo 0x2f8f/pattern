@@ -4,7 +4,7 @@ namespace AppBundle\Pattern\Creational\Prototype;
 
 /**
  * Пораждающий паттерн Прототип (Prototype)
- * Клонирование через метод getClone
+ * Клонирование через метод getClone()
  *
  * Class ClassB
  * @package AppBundle\Pattern\Creational\Prototype
