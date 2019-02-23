@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class TestCommand extends Command
 {
     // the name of the command (the part after "bin/console")
-    protected static $defaultName = 'app:test';
+    protected static $defaultName = 'pattern:test';
     protected function configure()
     {
         // ...
